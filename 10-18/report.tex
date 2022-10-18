@@ -1,0 +1,80 @@
+%\documentstyle[epsf,twocolumn]{jarticle}       %LaTeX2.09仕様
+%\documentclass[twocolumn]{jarticle}     %pLaTeX2e仕様
+\documentclass{jarticle}     %pLaTeX2e仕様
+
+%一枚組だったら[twocolumn]関係のとこ消す
+
+\setlength{\topmargin}{-45pt}
+%\setlength{\oddsidemargin}{0cm} 
+\setlength{\oddsidemargin}{-7.5mm}
+%\setlength{\evensidemargin}{0cm} 
+\setlength{\textheight}{24.1cm}
+%setlength{\textheight}{25cm} 
+\setlength{\textwidth}{17.4cm}
+%\setlength{\textwidth}{172mm} 
+\setlength{\columnsep}{11mm}
+
+\kanjiskip=.07zw plus.5pt minus.5pt
+
+\usepackage{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{diagbox}
+
+
+\begin{document}
+  \onecolumn
+  \noindent
+  \hspace{1em}
+
+  \today
+  \hfill
+  \ \  B3 西村昭賢 
+
+  \vspace{2mm}
+  \hrule
+  \begin{center}
+  {\Large \bf 情報工学実験2 10/18課題}
+  \end{center}
+  \hrule
+  \vspace{3mm}
+
+
+\section*{タイトル}
+不完全情報ゲームにおける強化学習を用いた戦略の構築とその分析
+
+\section*{著者}
+阿部慎太郎,竹川高志
+
+\section*{何に関する研究か}
+プレイヤーに与えられる情報が部分的である不完全情報ゲームでは,駆け引きが生じるため必勝手は存在しない.また,不完全情報ゲームの中でもプロ選手が生まれていることから無数にある戦略の中でも総合的な優劣があると考えられる.\par
+この研究では,このような不完全情報ゲームにおいて平均的に勝つことができる戦略の構築を目指している.
+実験の際に使用する不完全情報ゲームとしては,図1に示した5枚のカードverの「ハゲタカのえじき」を採用している.\par
+強化学習を用いて特定の対戦相手との対戦からcounter戦略を作成する.不完全情報ゲームには平均的に勝つことのできる強い戦略が存在するという仮定に基づき,counter戦略の対戦を繰り返すことでより強い戦略の構築を目指した.\par
+
+
+\section*{著者が主張している点}
+
+\subsection*{実験内容}
+実験の際には,手札からランダムにカードを出すrandom戦略,バフだと同じカードを数字から出す固定戦略,DQNを用いて相手との対戦から学習を行いカウンターとなる行動を選択するcounter戦略,複数の戦略の中から対戦ごとに強い戦略を多く選択するように戦略を切り替える切り替え戦略の4つの戦略を設定した.
+また,本研究ではcounter戦略 vs random戦略の対戦,counter戦略 vs 固定戦略の対戦を行っている.\par
+\subsection*{counter戦略 vs random戦略}
+counter戦略 vs random戦略の対戦では,ランダム戦略との対戦を繰り返して学習したcounte\_random戦略を構築した.
+その結果,counter\_random戦略はrandom戦略に対して約88\%場札と同じ数字のカードを手札から出す傾向があることが判明した.すなわちrandom戦略には固定戦略が有効であることが判明した.
+\subsection*{counter戦略 vs 固定戦略}
+
+\section*{興味深い点}
+
+\section*{この次に読むべき資料}
+
+
+%index.bibはtexファイルと同階層に置く
+%ちゃんと\citeしないと表示されない(1敗)
+\bibliography{index.bib}
+\bibliographystyle{junsrt}
+
+\end{document}
