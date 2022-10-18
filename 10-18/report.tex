@@ -66,6 +66,7 @@
 counter戦略 vs random戦略の対戦では,ランダム戦略との対戦を繰り返して学習したcounte\_random戦略を構築した.
 その結果,counter\_random戦略はrandom戦略に対して約88\%場札と同じ数字のカードを手札から出す傾向があることが判明した.すなわちrandom戦略には固定戦略が有効であることが判明した.
 \subsection*{counter戦略 vs 固定戦略}
+counter戦略 vs 固定戦略の対戦では,まず,counter戦略 vs 固定戦略の対戦から学習し,counter\_1戦略を作成した.同様にcounter\_1戦略の対戦から学習したcounter\_2戦略を作成し,固定,counter\_1,counter\_2の3つの戦略でグループを構築し,グループの総当りから勝率の割合を計算し,切り替え戦略\_1を作成する.
 
 \section*{興味深い点}
 
