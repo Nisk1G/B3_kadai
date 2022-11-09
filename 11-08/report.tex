@@ -1,0 +1,98 @@
+%\documentstyle[epsf,twocolumn]{jarticle}       %LaTeX2.09仕様
+%\documentclass[twocolumn]{jarticle}     %pLaTeX2e仕様
+\documentclass{jarticle}     %pLaTeX2e仕様
+
+%一枚組だったら[twocolumn]関係のとこ消す
+
+\setlength{\topmargin}{-45pt}
+%\setlength{\oddsidemargin}{0cm} 
+\setlength{\oddsidemargin}{-7.5mm}
+%\setlength{\evensidemargin}{0cm} 
+\setlength{\textheight}{24.1cm}
+%setlength{\textheight}{25cm} 
+\setlength{\textwidth}{17.4cm}
+%\setlength{\textwidth}{172mm} 
+\setlength{\columnsep}{11mm}
+
+\kanjiskip=.07zw plus.5pt minus.5pt
+
+\usepackage{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{diagbox}
+
+
+\begin{document}
+  \noindent
+  \onecolumn
+  \hspace{1em}
+  \today
+  \hfill
+  \ \  B3 西村昭賢 
+
+  \vspace{2mm}
+  \hrule
+  \begin{center}
+  {\Large \bf B3実験 11月8日分課題}
+  \end{center}
+  \hrule
+  \vspace{3mm}
+
+\section{課題1}
+\subsection{実験内容}
+gensim の Word2Vec ライブラリを使い, 与えられたテキストを学習した.
+
+\subsection{前処理 と　モデルのパラメータ}
+与えられたテキストにおいて　.  !  ?  ' のみ残し,その他の半角記号を消去した.その後  . ! ? の3つの記号に関しては前後に空白を挟むように調整し,文章中の全単語を小文字にした.
+そして, Natural Language Toolkit (nltk) を用いて分かち書きした. その後  . ! ? の記号を文末と定義して 1 文ごとに分けて Word2Vec のモデルの学習を行えるようにした.
+また, 表 に今回作成したWord2Vecモデルのパラメータを示す
+
+\begin{table}[h]
+  \caption{Word2Vecにおけるパラメータ}
+  \label{Word2Vec}
+  \centering
+  \begin{tabular}{c|ccc}
+    \hline
+    パラメータ     & 分散表現の次元  &  学習時に利用される文脈の広さ    & 分散表現を獲得する単語の最小頻度 \\
+    値 &  500 & 5 & 1 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+
+\subsection{実験結果}
+適当な名詞,動詞,形容詞を 1 つ選択しその単語と近い類似度の単語を5個調べた.
+今回は名詞として 'alice' , 動詞として 'think' , 形容詞として 'good' を選択した.表 \ref{alice} にそれぞれの結果を示す.
+
+\begin{table}[h]
+  \caption{'alice'に最も類似度が高い上位 5 単語}
+  \label{alice}
+  \centering
+  \begin{tabular}{l|ccccc}
+    \hline
+    単語       & 'trouble'  & 'wish'     & 'what'     & 'little'   & 'then'     \\
+    類似度 & 0.130898 & 0.124550 & 0.104635 & 0.094204 & 0.092406 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+
+
+\section{???}
+
+
+\section{???}
+
+
+%index.bibはtexファイルと同階層に置く
+%ちゃんと\citeしないと表示されない(1敗)
+\bibliography{index.bib}
+\bibliographystyle{junsrt}
+
+\end{document}
