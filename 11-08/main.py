@@ -55,7 +55,7 @@ for i in tokens:
 #print(tokens_resized)
 
 
-model = Word2Vec(sentences=tokens_resized, vector_size=500, window=5, min_count=1)
+model = Word2Vec(sentences=tokens_resized, vector_size=500, window=5, min_count=1, sg = 1)
 model.wv.save_word2vec_format('assets/sample_word2vec.txt')
 
 #似ている単語
