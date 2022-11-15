@@ -1,0 +1,75 @@
+%\documentstyle[epsf,twocolumn]{jarticle}       %LaTeX2.09仕様
+%\documentclass[twocolumn]{jarticle}     %pLaTeX2e仕様
+\documentclass{jarticle}     %pLaTeX2e仕様
+
+%一枚組だったら[twocolumn]関係のとこ消す
+
+\setlength{\topmargin}{-45pt}
+%\setlength{\oddsidemargin}{0cm} 
+\setlength{\oddsidemargin}{-7.5mm}
+%\setlength{\evensidemargin}{0cm} 
+\setlength{\textheight}{24.1cm}
+%setlength{\textheight}{25cm} 
+\setlength{\textwidth}{17.4cm}
+%\setlength{\textwidth}{172mm} 
+\setlength{\columnsep}{11mm}
+
+\kanjiskip=.07zw plus.5pt minus.5pt
+
+\usepackage{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{diagbox}
+\usepackage{float}
+
+\begin{document}
+  \noindent
+  \onecolumn
+  \hspace{1em}
+  \today
+  \hfill
+  \ \  B3 西村昭賢 
+
+  \vspace{2mm}
+  \hrule
+  \begin{center}
+  {\Large \bf B3実験 11月15日進捗}
+  \end{center}
+  \hrule
+  \vspace{3mm}
+
+\section{今日やったこと}
+
+\begin{itemize}
+  \item モンテカルロ法の実装(未完成)
+  \item Dockerのコンテナの環境構築
+\end{itemize}
+
+\section{モンテカルロ法の実装}
+シミュレーションして Q 値を計算する段階で実際の環境まで変化させていた.
+シミュレーション間で action 履歴把握して環境を戻す処理を実装する必要があると分かった.
+
+\section{Dockerのコンテナの環境構築}
+これまで Docker から逃げてきたが,先輩方がいるタイミングで向き合うことにした.
+学習コードを動かそうとしたが,gymのインストールは上手く行き,kerasのインストールの段階で version のエラーが出た.
+もう一回　Poetry でプロジェクトを作り直して試してみる予定
+
+\section{今週やること}
+
+\begin{itemize}
+  \item モンテカルロ法の実装
+  \item 実験環境の改良
+  \item Dockerのコンテナの環境構築
+\end{itemize}
+
+
+%index.bibはtexファイルと同階層に置く
+%ちゃんと\citeしないと表示されない(1敗)
+\bibliography{index.bib}
+\bibliographystyle{junsrt}
+
+\end{document}
