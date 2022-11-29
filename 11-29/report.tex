@@ -1,0 +1,93 @@
+%\documentstyle[epsf,twocolumn]{jarticle}       %LaTeX2.09仕様
+%\documentclass[twocolumn]{jarticle}     %pLaTeX2e仕様
+\documentclass[twocolumn]{jarticle}     %pLaTeX2e仕様
+
+%一枚組だったら[twocolumn]関係のとこ消す
+
+\setlength{\topmargin}{-45pt}
+%\setlength{\oddsidemargin}{0cm} 
+\setlength{\oddsidemargin}{-7.5mm}
+%\setlength{\evensidemargin}{0cm} 
+\setlength{\textheight}{24.1cm}
+%setlength{\textheight}{25cm} 
+\setlength{\textwidth}{17.4cm}
+%\setlength{\textwidth}{172mm} 
+\setlength{\columnsep}{11mm}
+
+\kanjiskip=.07zw plus.5pt minus.5pt
+
+\usepackage{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{diagbox}
+
+
+\begin{document}
+\twocolumn[
+  \noindent
+  \hspace{1em}
+
+  \today
+  \hfill
+  \ \  B3 西村昭賢 
+
+  \vspace{2mm}
+  \hrule
+  \begin{center}
+  {\Large \bf 自作カードゲーム環境への深層強化学習手法の適用}
+  \end{center}
+  \hrule
+  \vspace{3mm}
+]
+
+\section{はじめに}
+近年,人工知能に関する研究分野は目覚ましい発展を遂げており世の中の様々な分野に応用されている.その中でも人間の脳の働きに近いとされる強化学習と深層学習を組み合わせた深層強化学習は自動運転,ロボット,推薦システムといった実生活の問題解決だけでなくゲームへの応用も盛んに行われている.
+\par
+深層強化学習のゲームへの応用はAlphaGo,AlphaZeroなど将棋や囲碁といった完全情報ゲームへの応用が有名である.AlphaZeroは棋譜といった教師データを用いず完全に強化学習のみで既にプロを圧倒している.一方で最近では麻雀,ポーカーのようなプレイヤーに与えられる情報が部分的である不完全情報ゲームへの応用が注目されている.本研究では自作した不完全情報ゲーム環境へのDeepQNetworkといった深層強化学習を適用,戦略の構築方法を検証する.
+
+\section{要素技術}
+
+\subsection{OpenAI Gym}
+OpenAI Gym は人工知能を研究する非営利企業 OpenAI が作った、強化学習のシミュレーション用プラットフォームである.強化学習の環境として多くのゲームが登録されている.環境におけるエージェントの行動空間の次元や状態空間,報酬などを定義することで自作の環境も登録し利用することができる.シミュレーション環境と強化学習アルゴリズム間のインターフェースが確立されているため容易に強化学習を試すことができる.
+
+\subsection{Q学習}
+強化学習では,エージェントが行動することで環境から報酬を得る.強化学習における行動はその直後に獲得する報酬の大きさではなく未来に渡っての報酬の総和を見積もった値である「価値」の最大化につながるかという観点で評価される.
+価値の最大化を目指す場合にはある状態$s$において行動$a$をとったときの価値が分かれば良い.この価値のことを Q 値,行動価値観数と呼ぶ.
+Q学習ではエージェントの 1 ステップごとに(\ref{updateQ})式に示す更新式で Q 値の更新を行う.
+\begin{equation}
+  \label{updateQ}
+  Q(s_t,a_t) \leftarrow  Q(s_t,a_t) + \alpha(r_{t+1} + \gamma \mathrm{max}_{a_{t+1}}Q(s_{t+1},a_{t+1}) - Q(s_t,a_t))
+\end{equation}
+なお, $t$ は時間 , $r$ は報酬, $\alpha$ は Q 値の更新量を現在の Q 値にどれだけ反映させるかを示す学習率, $\gamma$ は将来の価値をどれだけ割り引いて考えるかを表す割引率である\cite{緑本}.
+
+\subsection{Deep Q Network}
+Q学習を実際に実装するとなると,Q値のテーブルができる.しかし,状態が離散的ではなく連続的な環境の場合 Q テーブルのメモリ量は爆発してしまう.この問題を解決した技術が Deep Q Network である.
+ニューラルネットワークを用いて,ある状態における行動ごとのQ値を推定する.エージェントが経験した過去の体験をreplay memolyに一定期間保存して置き、過去の経験をランダムにサンプリングして学習を行うExperience Replay,行動を決定するQ値のネットワークとQ値の学習を行うネットワークを分けることでQ値の過大評価を防ぐFixed Target Networkといった工夫により安定した学習が可能となっている\cite{DQN}.
+
+\subsection{モンテカルロ法}
+モンテカルロ法は Q学習と同様に Q 値を推定する学習アルゴリズムであるが, Q 学習のように 1 ステップごとに Q 値を更新するのではなく, 1 エピソードをランダムに行動し終了状態に到達してからQ 値の更新を行う. Q 値の更新は学習率 $\alpha$ , 割引率 $\gamma$ ,エピソードから得られた割引現在価値 $G_t$ を用いて (\ref{montecarlo}) 式に従う\cite{緑本}.
+\begin{eqnarray}
+  \label{montecarlo}
+  &Q(s,a) \leftarrow Q(s,a)(1 - \alpha) + \alpha * G_{t} \\
+  where  &G_t = r_{t+1} + \gamma r_{t+2} + ... + \gamma^{T-t-1} r_{t+k+1} 
+\end{eqnarray}
+
+
+\section{実験}
+
+
+\section{結果}
+\section{考察}
+\section{今後の課題}
+
+
+%index.bibはtexファイルと同階層に置く
+%ちゃんと\citeしないと表示されない(1敗)
+\bibliography{index.bib}
+\bibliographystyle{junsrt}
+
+\end{document}
