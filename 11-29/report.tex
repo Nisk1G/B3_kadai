@@ -72,17 +72,20 @@ Q学習を実際に実装するとなると,Q値のテーブルができる.し�
 モンテカルロ法は Q学習と同様に Q 値を推定する学習アルゴリズムであるが, Q 学習のように 1 ステップごとに Q 値を更新するのではなく, 1 エピソードをランダムに行動し終了状態に到達してからQ 値の更新を行う. Q 値の更新は学習率 $\alpha$ , 割引率 $\gamma$ ,エピソードから得られた割引現在価値 $G_t$ を用いて (\ref{montecarlo}) 式に従う\cite{緑本}.
 \begin{eqnarray}
   \label{montecarlo}
-  &Q(s,a) \leftarrow Q(s,a)(1 - \alpha) + \alpha * G_{t} \\
-  where  &G_t = r_{t+1} + \gamma r_{t+2} + ... + \gamma^{T-t-1} r_{t+k+1} 
+  &Q(s_t,a_t) \leftarrow Q(s_t,a_t)(1 - \alpha) + \alpha * G_{t} \\
+  where  &G_t = r_{t+1} + \gamma r_{t+2} + ... + \gamma^{T-t-1} r_{t+k+1} \nonumber
 \end{eqnarray}
 
 
+\section{作成したカードゲーム環境}
+未定
 \section{実験}
-
+未定
 
 \section{結果}
-\section{考察}
+未定
 \section{今後の課題}
+未定
 
 
 %index.bibはtexファイルと同階層に置く
